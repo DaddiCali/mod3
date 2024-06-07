@@ -1,0 +1,71 @@
+# eth and avax
+
+Metacrafters offers an intermediate-level course, "ETH + AVAX PROOF: Intermediate EVM Course," which focuses on building skills in Solidity, the programming language that powers the Ethereum blockchain. This course is designed to help learners transition from beginner knowledge to professional-level skills in Solidity, enabling them to create decentralized applications (DApps) and connect them to wallets and user interfaces.
+
+## Description
+
+This program is a simple contract written in Solidity, a programming language used for developing smart contracts on the Ethereum blockchain. The contract has a single function that returns the string "Hello World!". This program serves as a simple and straightforward introduction to Solidity programming, and can be used as a stepping stone for more complex projects in the future.
+
+## Getting Started
+
+### Executing program
+
+To run this program, you can use Remix, an online Solidity IDE. To get started, go to the Remix website at https://remix.ethereum.org/.
+
+Once you are on the Remix website, create a new file by clicking on the "+" icon in the left-hand sidebar. Save the file with a .sol extension (e.g., HelloWorld.sol). Copy and paste the following code into the file:
+
+### Executing program
+
+To run this program, you can use Remix, an online Solidity IDE. To get started, go to the Remix website at https://remix.ethereum.org/.
+
+Once you are on the Remix website, create a new file by clicking on the "+" icon in the left-hand sidebar. Save the file with a .sol extension (e.g., HelloWorld.sol). Copy and paste the following code into the file:
+
+```
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
+contract Module3 is ERC20 {
+    event TransferCustom(address indexed from, address indexed to, uint256 value);
+    event Burn(address indexed burner, uint256 value);
+    event Mint(address indexed to, uint256 value);
+
+    constructor() ERC20("CALCULATION", "CARLSLY JUNE") {
+        _mint(msg.sender, 100 * (10 * uint256(decimals()))); 
+    }
+
+    function transfer(address recipient, uint256 amount) public virtual override returns (bool) {
+        bool success = super.transfer(recipient, amount);
+        if (success) {
+            emit TransferCustom(msg.sender, recipient, amount);
+        }
+        return success;
+    }
+
+    function burn(uint256 amount) public {
+        _burn(msg.sender, amount);
+        emit Burn(msg.sender, amount);
+    }
+
+    function mint(address to, uint256 amount) public {
+        _mint(to, amount);
+        emit Mint(to, amount);
+    }
+}
+```
+
+first things first is The constructor function i initialize my token with a name "CALCULATION" and a symbol "CARLSLY JUNE". These are just identifiers for my token,
+
+
+Then comes the minting part. We mint a certain amount of tokens and assign them to the contract deployer (msg.sender) using the _mint function inherited from ERC20. In this case, we're minting 2001 tokens multiplied by 91 raised to the power of the number of decimals
+
+Next up, we define a custom transfer function. This function overrides the default transfer function from ERC20 to add some extra functionality. Whenever a transfer happens successfully, it emits a custom TransferCustom event, which provides additional transparency and insight into token movements.
+
+and then we have two more functions: burn and mint. The burn function allows token holders to destroy (or "burn") their tokens, effectively reducing the total supply. and the mint function enables the contract owner to create (or "mint") new tokens and assign them to specific addresses.
+
+carlsly june d butt
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
